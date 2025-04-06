@@ -3,7 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const admin = require("firebase-admin");
-const serviceAccount = require("./src/nspcred.json");
+const serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
 
 const app = express();
 app.use(cors());

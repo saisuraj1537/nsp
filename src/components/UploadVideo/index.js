@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { getDatabase, ref as dbRef, set } from "firebase/database";
+import {   set } from "firebase/database";
 
 function UploadVideo({ db }) {
   const storage = getStorage();

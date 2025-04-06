@@ -1,0 +1,181 @@
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import Header from "../Header";
+// import fundamentalsImg from "../../assets/drone-fundamentals.jpg";
+// import planningImg from "../../assets/mission-planning.jpg";
+// import computingImg from "../../assets/onboard-computing.jpg";
+// import "./index.css";
+
+// const Home = () => {
+//   const navigate = useNavigate();
+
+//   const modules = [
+//     {
+//       name: "Drone Fundamentals",
+//       image: fundamentalsImg,
+//       path: "/fundamentals",
+//       description: "Learn the basics of drone technology, aerodynamics, and key components that make drones fly."
+//     },
+//     {
+//       name: "Mission Planning",
+//       image: planningImg,
+//       path: "/planning",
+//       description: "Understand how to create, manage, and optimize flight missions for various applications."
+//     },
+//     {
+//       name: "On Board Computing",
+//       image: computingImg,
+//       path: "/computing",
+//       description: "Explore embedded computing systems used in drones for real-time decision-making and automation."
+//     }
+//   ];
+
+//   return (
+//     <div className="container-fluid p-0">
+//       <Header />
+//       <div className="container pt-3">
+//         <h2 className="fw-bold course-head text-center mb-4">Drone Course</h2>
+//         <div className="row d-flex justify-content-center mt-1">
+//           {modules.map((module, index) => (
+//             <div key={index} className="col-md-4 mb-4 d-flex">
+//               <div
+//                 className="card module-card shadow-lg w-100 d-flex flex-column"
+//                 onClick={() => navigate(module.path)}
+//               >
+//                 <img
+//                   src={module.image}
+//                   className="card-img-top img-fluid"
+//                   style={{ height: "250px", objectFit: "cover" }}
+//                   alt={module.name}
+//                 />
+//                 <div className="card-body text-center bg-light flex-grow-1 d-flex flex-column">
+//                   <h5 className="card-title fw-bold text-primary">{module.name}</h5>
+//                   <p className="card-text text-muted flex-grow-1">{module.description}</p>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Home;
+
+
+import React, { useEffect, useRef, useState } from "react";
+
+const YouTubeVideo = () => {
+  const playerRef = useRef(null);
+  const [playerReady, setPlayerReady] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  useEffect(() => {
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      tag.async = true;
+      document.body.appendChild(tag);
+      window.onYouTubeIframeAPIReady = initializePlayer;
+    } else {
+      initializePlayer();
+    }
+
+    document.addEventListener("fullscreenchange", handleFullScreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullScreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullScreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullScreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullScreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullScreenChange);
+      document.removeEventListener("mozfullscreenchange", handleFullScreenChange);
+      document.removeEventListener("MSFullscreenChange", handleFullScreenChange);
+    };
+  }, []);
+
+  const initializePlayer = () => {
+    if (!window.YT) return;
+
+    playerRef.current = new window.YT.Player("youtube-player", {
+      videoId: "e9QJ1jkmo5s", // Your YouTube video ID
+      playerVars: {
+        modestbranding: 1,
+        controls: 0,
+        rel: 0,
+        disablekb: 1,
+      },
+      events: {
+        onReady: (event) => {
+          playerRef.current = event.target;
+          setTimeout(() => {
+            playerRef.current.setPlaybackQuality("hd720"); // Force 720p
+          }, 500);
+          setPlayerReady(true);
+        },
+        onStateChange: (event) => {
+          if (event.data === window.YT.PlayerState.PLAYING) {
+            setTimeout(() => {
+              playerRef.current.setPlaybackQuality("hd720"); // Ensure 720p when playing
+            }, 500);
+          }
+        },
+      },
+    });
+  };
+
+  const handleFullScreenChange = () => {
+    setIsFullScreen(
+      document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
+    );
+  };
+
+  const playVideo = () => {
+    if (playerReady) {
+      playerRef.current.playVideo();
+      setTimeout(() => {
+        playerRef.current.setPlaybackQuality("hd720"); // Force 720p when playing
+      }, 500);
+    }
+  };
+
+  const pauseVideo = () => playerReady && playerRef.current?.pauseVideo();
+  const forwardVideo = () => playerReady && playerRef.current?.seekTo(playerRef.current.getCurrentTime() + 10, true);
+  const backwardVideo = () => playerReady && playerRef.current?.seekTo(playerRef.current.getCurrentTime() - 10, true);
+
+  return (
+    <div className="container text-center mt-4" style={{ width: "90vw", height: "90vh", margin: "auto" }}>
+      {/* Video Wrapper */}
+      <div className="position-relative d-inline-block w-100 h-100">
+        {/* YouTube Video */}
+        <div id="youtube-player" className="w-100 h-100"></div>
+
+        {/* Transparent Overlay to Prevent Direct Clicks */}
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{ backgroundColor: "transparent", zIndex: 1 }}
+        ></div>
+
+        {/* Overlay Controls */}
+        <div
+          className="position-absolute d-flex align-items-center justify-content-center w-100"
+          style={{
+            zIndex: 2,
+            bottom: isFullScreen ? "10px" : "0",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <button onClick={backwardVideo} className="btn btn-secondary me-2" disabled={!playerReady}>⏪</button>
+          <button onClick={playVideo} className="btn btn-success me-2" disabled={!playerReady}>▶️</button>
+          <button onClick={pauseVideo} className="btn btn-danger me-2" disabled={!playerReady}>⏸️</button>
+          <button onClick={forwardVideo} className="btn btn-secondary me-2" disabled={!playerReady}>⏩</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default YouTubeVideo;

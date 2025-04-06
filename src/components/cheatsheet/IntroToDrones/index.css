@@ -1,0 +1,19 @@
+.custom-card {
+    border: none !important;
+    border-radius: 12px;
+    background-color: #f9fbfd;
+    padding: 12px 18px;
+  }
+  
+  .custom-title {
+    margin-bottom: 10px;
+  }
+  
+  .custom-text {
+    margin-bottom: 10px;
+  }
+  
+  .custom-list li {
+    margin-bottom: 6px;
+  }
+  

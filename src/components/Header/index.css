@@ -1,0 +1,18 @@
+.navbar {
+    padding: 10px 20px;
+  }
+  
+  .navbar-brand img {
+    max-height: 50px;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 15px;
+  }
+  
+  .btn {
+    padding: 8px 15px;
+  }
+  

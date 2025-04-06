@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/nsp/static/css/main.a04bf2b4.css",
+    "main.js": "/nsp/static/js/main.9f017502.js",
+    "static/js/453.f1eb7928.chunk.js": "/nsp/static/js/453.f1eb7928.chunk.js",
+    "static/media/drone-banner.jpg": "/nsp/static/media/drone-banner.cf41f800f494c89b077e.jpg",
+    "static/media/mission-planning.jpg": "/nsp/static/media/mission-planning.7236b6219373298cd695.jpg",
+    "static/media/drone-fundamentals.jpg": "/nsp/static/media/drone-fundamentals.d5379e8e15753e307178.jpg",
+    "static/media/onboard-computing.jpg": "/nsp/static/media/onboard-computing.6cab905038975362e968.jpg",
+    "static/media/company-logo.jpg": "/nsp/static/media/company-logo.d90321d160b84fcf5c49.jpg",
+    "static/media/googleLogo.jpg": "/nsp/static/media/googleLogo.7e494a9e65d7765af695.jpg",
+    "index.html": "/nsp/index.html",
+    "main.a04bf2b4.css.map": "/nsp/static/css/main.a04bf2b4.css.map",
+    "main.9f017502.js.map": "/nsp/static/js/main.9f017502.js.map",
+    "453.f1eb7928.chunk.js.map": "/nsp/static/js/453.f1eb7928.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a04bf2b4.css",
+    "static/js/main.9f017502.js"
+  ]
+}

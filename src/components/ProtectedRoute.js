@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/verifyToken", {
+        const response = await fetch("https://nsp-oknl.onrender.com/verifyToken", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",

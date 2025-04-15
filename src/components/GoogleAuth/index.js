@@ -17,7 +17,7 @@ const GoogleAuth = () => {
       const token = localStorage.getItem("jwt_token");
       if (token) {
         try {
-          const response = await fetch("https://saisuraj1537.github.io/verifyToken", {
+          const response = await fetch("https://nsp-lvw1.onrender.com/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
@@ -53,7 +53,7 @@ const GoogleAuth = () => {
         return;
       }
 
-      const response = await fetch("https://saisuraj1537.github.io/verifyUser", {
+      const response = await fetch("https://nsp-lvw1.onrender.com/verifyUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, mobileNumber }),

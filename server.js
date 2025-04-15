@@ -59,7 +59,7 @@ app.post("/generateToken", async (req, res) => {
     }
 
     // ✅ Generate JWT token (valid for 1 hour)
-    const token = jwt.sign({ email: userEmail }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ email: userEmail }, SECRET_KEY, { expiresIn: "10h" });
 
     res.json({ token });
   } catch (error) {
